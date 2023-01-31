@@ -11,6 +11,17 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+.level {
+    width: 5rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-lr;
+    color: #fff;
+}
+
 .memory-game {
     width: 90%;
     max-width: 640px;

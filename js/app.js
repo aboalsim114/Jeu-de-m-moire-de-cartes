@@ -4,7 +4,7 @@ const replayButton = document.getElementById('replay-button');
 const nb_essaie = document.getElementById('nb_essaie');
 // Sélection de toutes les cartes sur la page
 const cards = document.querySelectorAll('.memory-card');
-const levelId = document.getElementById("level");
+const levelId = document.querySelector(".levelId");
 
 
 
@@ -47,7 +47,7 @@ function flipCard() {
 
 let matches = 0;
 let essaie = 10;
-
+let level = 1;
 nb_essaie.innerHTML = "nombres d'essaie = " + essaie;
 
 function checkEssaie() {
@@ -95,7 +95,8 @@ function checkForMatch() {
                 card.removeEventListener('click', flipCard);
             });
             replayButton.style.display = 'block';
-
+            level++;
+            levelId.innerHTML += level;
 
 
 
