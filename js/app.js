@@ -8,13 +8,17 @@ const cards = document.querySelectorAll('.memory-card');
 
 
 // Ajout d'un événement de clic à chaque carte
-cards.forEach(card => {
+
+
+cards.forEach((card, index) => {
     // Génération d'un nombre aléatoire 
-    const randomNum = Math.floor(Math.random() * cards.length);
-    card.innerHTML = `<span style="font-size : 30px" class="random-num">${randomNum}</span>`;
+    const pairNum = Math.floor(index / 2);
+    card.innerHTML = `<span style="font-size : 30px" class="random-num">${pairNum}</span>`;
     card.querySelector('.random-num').style.display = "none";
     card.addEventListener('click', flipCard);
 });
+
+
 
 // Fonction pour retourner une carte
 function flipCard() {
@@ -39,7 +43,7 @@ function flipCard() {
 
 
 let matches = 0;
-let essaie = 5;
+let essaie = 12;
 
 nb_essaie.innerHTML = "nombres d'essaie = " + essaie;
 
@@ -75,7 +79,7 @@ function checkForMatch() {
 
         matches++;
 
-        if (matches === 3) {
+        if (matches === 6) {
             console.log("vous avez gagné ");
             Swal.fire(
                 'Bravo',
@@ -120,3 +124,30 @@ function unflipCards() {
     flippedCards[1].querySelector('.random-num').style.display = "none";
     flippedCards = [];
 }
+
+
+
+
+
+
+let timer = 60; // durée du compteur en secondes
+const timerDisplay = document.getElementById('timer-display');
+
+// mettre à jour l'affichage du compteur à chaque seconde
+const interval = setInterval(() => {
+    timer--;
+    timerDisplay.textContent = `Temps restant : ${timer} secondes`;
+
+    // arrêter le compteur lorsqu'il atteint 0
+    if (timer === 0) {
+        clearInterval(interval);
+        Swal.fire(
+            'Fin du temps',
+            'Votre temps est écoulé',
+            'error'
+        )
+        cards.forEach(card => {
+            card.removeEventListener('click', flipCard);
+        });
+    }
+}, 1000);
