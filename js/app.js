@@ -4,16 +4,19 @@ const replayButton = document.getElementById('replay-button');
 const nb_essaie = document.getElementById('nb_essaie');
 // Sélection de toutes les cartes sur la page
 const cards = document.querySelectorAll('.memory-card');
+const levelId = document.getElementById("level");
 
 
 
-// Ajout d'un événement de clic à chaque carte
+// Créer un tableau avec tous les nombres aléatoires
+const randomNums = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5];
 
+// Mélanger les nombres aléatoires
+randomNums.sort(() => Math.random() - 0.5);
 
 cards.forEach((card, index) => {
     // Génération d'un nombre aléatoire 
-    const pairNum = Math.floor(index / 2);
-    card.innerHTML = `<span style="font-size : 30px" class="random-num">${pairNum}</span>`;
+    card.innerHTML = `<span style="font-size : 30px" class="random-num">${randomNums[index]}</span>`;
     card.querySelector('.random-num').style.display = "none";
     card.addEventListener('click', flipCard);
 });
@@ -43,7 +46,7 @@ function flipCard() {
 
 
 let matches = 0;
-let essaie = 12;
+let essaie = 10;
 
 nb_essaie.innerHTML = "nombres d'essaie = " + essaie;
 
@@ -79,6 +82,8 @@ function checkForMatch() {
 
         matches++;
 
+
+
         if (matches === 6) {
             console.log("vous avez gagné ");
             Swal.fire(
@@ -90,6 +95,9 @@ function checkForMatch() {
                 card.removeEventListener('click', flipCard);
             });
             replayButton.style.display = 'block';
+
+
+
 
 
         }
