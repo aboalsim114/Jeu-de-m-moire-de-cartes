@@ -130,7 +130,7 @@ function unflipCards() {
 
 
 
-let timer = 60; // durée du compteur en secondes
+let timer = 30; // durée du compteur en secondes
 const timerDisplay = document.getElementById('timer-display');
 
 // mettre à jour l'affichage du compteur à chaque seconde
@@ -139,6 +139,11 @@ const interval = setInterval(() => {
     timerDisplay.textContent = `Temps restant : ${timer} secondes`;
 
     // arrêter le compteur lorsqu'il atteint 0
+
+    if (timer <= 5) {
+        timerDisplay.style.color = "#df4759";
+    }
+
     if (timer === 0) {
         clearInterval(interval);
         Swal.fire(
